@@ -1,0 +1,121 @@
+#include <bits/stdc++.h>
+using namespace std;
+// BST implementation
+
+class BST {
+	struct node {
+		int data;
+		node* left;
+		node* right;
+	} *root;
+
+	node* makeEmpty(node* t) {
+		if(t != NULL) {
+			makeEmpty(t->left);
+			makeEmpty(t->right);
+			delete t;
+		}
+		return NULL;
+
+	}
+
+	node* insert(int x, node* t) {
+		if(t==NULL) {
+			t = new node;
+			t->data = x;
+			t->left = t->right = NULL;
+		} else if(x < t->data) {
+			t->left = insert(x, t->left);
+		} else if(x > t->data) {
+			t->right = insert(x, t->right);
+		}
+		return t;
+	}
+
+	node* findMin(node* t) {
+		if(t==NULL) return NULL;
+		else if(t->left == NULL) return t;
+		else return findMin(t->left);
+	}
+
+	node* findMax(node* t) {
+		if(t==NULL) return NULL;
+		else if(t->right == NULL) return t;
+		else return findMax(t->right);
+	}
+
+	node* remove(int x, node* t) {
+		node* temp;
+		if(t==NULL) return NULL;
+		else if(x < t->data)
+			t->left = remove(x, t->left);
+		else if(x > t->data)
+			t->right = remove(x, t->right);
+		else if(t->left && t->right) {
+			temp = findMin(t->right);
+			t->data = temp->data;
+			t->right = remove(t->data, t->right);
+		} else {
+			temp = t;
+			if(t->left == NULL) t = t->right;
+			else if(t->right == NULL) t = t->left;
+			delete temp;
+		}
+		return t;
+	}
+
+	void inorder(node* t) {
+		if(t==NULL) return;
+		inorder(t->left);
+		cout << t->data << ' ';
+		inorder(t->right);
+	}
+
+	node* find(node* t, int x) {
+		if(t==NULL) return NULL;
+		else if(x < t->data)
+			return find(t->left, x);
+		else if(x > t->data)
+			return find(t->right, x);
+		else return t;
+	}
+
+public:
+	BST() {root=NULL;}
+	~BST() {root=makeEmpty(root);}
+
+	void insert(int x) {
+		root = insert(x, root);
+	}
+
+	void remove(int x) {
+		root = remove(x, root);
+	}
+
+	void display() {
+		inorder(root);
+		cout << '\n';
+	}
+
+	bool search(int x) {
+		node* temp;
+		temp = find(root, x);
+		return temp;
+	}
+};
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	
+	BST t;
+	t.insert(20);
+	t.insert(10);
+	t.insert(40);
+	t.insert(50);
+	t.insert(30);
+	// cout << t.search(20) << '\n';
+	t.display();
+	t.display();
+	return 0;
+}
