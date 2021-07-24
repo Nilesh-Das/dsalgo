@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     unordered_map<TreeNode*, TreeNode*> parent;
     stack<TreeNode*> stk;
@@ -12,4 +15,8 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     while (p) { ancestors.insert(p); p=parent[p]; }
     while (!ancestors.count(q)) q = parent[q];
     return q;
+}
+
+int main() {
+    return 0;
 }

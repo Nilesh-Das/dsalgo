@@ -1,5 +1,5 @@
 # Data Structures and Algorithms
-Collection of some implementation of data structures and algorithms in C++
+Collection of implementations of data structures and algorithms in C++
 
 ## Contributing
 

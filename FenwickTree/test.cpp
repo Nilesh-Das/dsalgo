@@ -32,10 +32,10 @@ public:
 };
 
 int main() {
-	vector<int> v = {1,2,3,4,5};
-	NumArray* obj = new NumArray(v);
-	cout << obj->sumRange(0,1) << '\n';
-	obj->update(0,2);
-	cout << obj->sumRange(0,2) << '\n';
-	cout << obj->sumRange(0,3) << '\n';
+    vector<int> v = {1,2,3,4,5};
+    NumArray* obj = new NumArray(v);
+    cout << obj->sumRange(0,1) << '\n';
+    obj->update(0,2);
+    cout << obj->sumRange(0,2) << '\n';
+    cout << obj->sumRange(0,3) << '\n';
 }

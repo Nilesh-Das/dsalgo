@@ -30,39 +30,40 @@ vector<vector<int>> dir = {{0,1},{1,0},{0,-1},{-1,0}};
 vector<vector<int>> dp;
 
 int longestPath(int r, int c) {
-  if(dp[r][c]!=-1) return dp[r][c];
-  int dp_max = -INF;
-  for(auto move : dir) {
-    int x = r + move[0];
-    int y = c + move[1];
-    if(x<0||x>=n||y<0||y>=n) continue;
-    if(a[r][c]+1!=a[x][y]) continue;
-    dp_max = max(dp_max, longestPath(x,y)+1);
-  }
-  return dp[r][c]=dp_max;
+    if(dp[r][c]!=-1) return dp[r][c];
+    int dp_max = -INF;
+    for(auto move : dir) {
+        int x = r + move[0];
+        int y = c + move[1];
+        if(x<0||x>=n||y<0||y>=n) continue;
+        if(a[r][c]+1!=a[x][y]) continue;
+        dp_max = max(dp_max, longestPath(x,y)+1);
+    }
+    return dp[r][c]=dp_max;
 }
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(0);
-	
-  cin >> n;
-  a.resize(n, vector<int>(n));
-  dp.resize(n, vector<int>(n, -1));
-  for(int i=0; i<n; i++)
-    for(int j=0; j<n; j++)
-      cin >> a[i][j];
-
-  int ans = 0;
-  for(int i=0; i<n; i++) {
-    for(int j=0; j<n; j++) {
-      if(dp[i][j]==-1) longestPath(i,j);
-      ans = max(ans, dp[i][j]);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    cin >> n;
+    a.resize(n, vector<int>(n));
+    dp.resize(n, vector<int>(n, -1));
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<n; j++) {
+            cin >> a[i][j];
+        }
     }
-  }
-  cout << ans << '\n';
 
-	return 0;
+    int ans = 0;
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<n; j++) {
+            if(dp[i][j]==-1) longestPath(i,j);
+            ans = max(ans, dp[i][j]);
+        }
+    }
+    cout << ans << '\n';
+
+    return 0;
 }
-
